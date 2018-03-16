@@ -5,8 +5,14 @@
     <title>title</title>
     <script src="build/main.bundle.js"></script>
     <script src="jscolor.min.js"></script>
+
   </head>
   <body>
     Color: <input class="jscolor {onFineChange:'update(this)'}" value="ab2567">
+    <script>
+      function update(jscolor) {
+        document.getElementById('myCanvas').style.backgroundColor = '#' + jscolor;
+      }
+    </script>
   </body>
 </html>

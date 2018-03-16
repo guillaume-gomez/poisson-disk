@@ -4,6 +4,7 @@ export function createCanvas() {
   const canvas = document.createElement("CANVAS");
   canvas.width = 600;
   canvas.height = 600;
+  canvas.id = 'myCanvas';
   canvas.style.backgroundColor = 'rgba(158, 167, 184, 0.2)';
   document.body.appendChild(canvas);
   setup(canvas);
