@@ -11,11 +11,13 @@ var config = {
     filename: 'main.bundle.js'
   },
   module : {
-    loaders : [
-      {
-        test : /\.js?/,
-        include : APP_DIR,
-        loader : 'babel'
+    loaders: [
+       {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015']
+        }
       }
     ]
   }
