@@ -4,17 +4,18 @@ const RADIUS = 1;
 const TREE_X = 5;
 const TREE_Y = 5;
 const OFFSET_X_MIN = 0;
-const OFFSET_X_MAX = 10;
+const OFFSET_X_MAX = 20;
 const OFFSET_Y_MIN = 0;
-const OFFSET_Y_MAX = 10;
+const OFFSET_Y_MAX = 20;
 const DEPTH_MAX = 2;
-
+const VAR_X = 10;
+const VAR_Y = 10;
 
 
 function createCanvas() {
   const canvas = document.createElement("CANVAS");
-  canvas.width = 600;
-  canvas.height = 800;
+  canvas.width = 100 * 6;
+  canvas.height = 100 * 8;
   canvas.id = 'myCanvas';
   canvas.style.backgroundColor = '#9E82B8';
   document.body.appendChild(canvas);
@@ -77,17 +78,26 @@ function generateGroupTree(context, x, y, width, height, depth) {
     createGroup(context, RADIUS, x, y, width, height);
     return;
   }
-  const rows = getRandomInt(1, 4);
+  const rows = getRandomInt(2, 4);
   const heightGroup = height / rows;
   
   const columns = getRandomInt(2, 3);
-  const widhGroup = width / columns;
+  const widthGroup = width / columns;
 
-  for(let yOffset = 0; yOffset < rows; yOffset++) {
+  let currentWidth = 0;
+  let currentHeight = 0;
+  for(let yOffsetIt = 0; yOffsetIt < rows; yOffsetIt++) {
     const offsetGroupY = getRandomInt(OFFSET_X_MIN, OFFSET_X_MAX);
-    for(let xOffset = 0; xOffset < columns; xOffset++) {
+    for(let xOffsetIt = 0; xOffsetIt < columns; xOffsetIt++) {
       const offsetGroupX = getRandomInt(OFFSET_Y_MIN, OFFSET_Y_MAX);
-      generateGroupTree(context, x + (xOffset * widhGroup), y + (yOffset * heightGroup), widhGroup - offsetGroupX, heightGroup - offsetGroupY, depth + 1);
+
+      currentWidth = (xOffsetIt * widthGroup);
+      currentHeight = (yOffsetIt * heightGroup);
+      const newWidth = widthGroup;
+      const newHeight = heightGroup;
+      const newX = x + currentWidth;
+      const newY = y + currentHeight;
+      generateGroupTree(context, newX, newY, newWidth - offsetGroupX, newHeight - offsetGroupY, depth + 1);
     }
   }
 }
