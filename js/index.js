@@ -17,6 +17,13 @@ function createExportButtonImg(canvas) {
   document.body.appendChild(button);
 }
 
+function createExportButtonImgNoBg(canvas) {
+  const button = document.createElement("BUTTON");
+  button.innerHTML = 'export to png without background color';
+  button.onclick = () => { saveImage(canvas, false) };
+  document.body.appendChild(button);
+}
+
 function createText(canvas) {
   let context = canvas.getContext('2d');
   context.font = "20px Arial";
@@ -28,6 +35,7 @@ function createText(canvas) {
 function init() {
   const canvas = createCanvas();
   createExportButtonImg(canvas);
+  createExportButtonImgNoBg(canvas);
   createText(canvas);
   setup(canvas);
 }
@@ -51,16 +59,18 @@ function createDot(context, x, y, radius) {
   context.fill();
 }
 
-function saveImage(canvas) {
+function saveImage(canvas, withBg = true) {
   // create a second canvas
   let destinationCanvas = document.createElement("canvas");
   destinationCanvas.width = canvas.width;
   destinationCanvas.height = canvas.height;
 
   let destCtx = destinationCanvas.getContext('2d');
-  //create a rectangle with the desired color
-  destCtx.fillStyle = canvas.style.backgroundColor;
-  destCtx.fillRect( 0, 0, canvas.width, canvas.height);
+  if (withBg) {
+    //create a rectangle with the desired color
+    destCtx.fillStyle = canvas.style.backgroundColor;
+    destCtx.fillRect( 0, 0, canvas.width, canvas.height);
+  }
   
   //draw the original canvas onto the destination canvas
   destCtx.drawImage(canvas, 0, 0);
