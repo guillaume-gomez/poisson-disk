@@ -42,13 +42,8 @@ function init() {
 
 function setup(canvas) {
   let context = canvas.getContext('2d');
-
   let radius = 1;
-  const p = new Poisson([200, 300], 5, 25, 30);
-  const points = p.fill();
-  points.forEach(([x,y]) => {
-    createDot(context, x, y, radius);
-  });
+  createGroup(context, radius, 200, 300, 15, 0);
 
 }
 
@@ -57,6 +52,14 @@ function createDot(context, x, y, radius) {
   context.arc(x, y, radius, 0, 2 * Math.PI, false);
   context.fillStyle = 'black';
   context.fill();
+}
+
+function createGroup(context, radius, width, height, xOffset = 0, yOffset = 0) {
+  const p = new Poisson([width, height], 5, 25, 30);
+  const points = p.fill();
+  points.forEach(([x,y]) => {
+    createDot(context, x + xOffset, y + yOffset, radius);
+  });
 }
 
 function saveImage(canvas, withBg = true) {
