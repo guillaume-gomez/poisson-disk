@@ -36,7 +36,6 @@ function init() {
   const canvas = createCanvas();
   createExportButtonImg(canvas);
   createExportButtonImgNoBg(canvas);
-  createText(canvas);
   setup(canvas);
 }
 
@@ -91,9 +90,12 @@ function saveImage(canvas, withBg = true) {
     destCtx.fillStyle = canvas.style.backgroundColor;
     destCtx.fillRect( 0, 0, canvas.width, canvas.height);
   }
-  
+
   //draw the original canvas onto the destination canvas
+
   destCtx.drawImage(canvas, 0, 0);
+  //add signature :)
+  createText(destinationCanvas);
   
   const image = destinationCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
   window.location.href = image;
