@@ -17,6 +17,21 @@ function createExportButtonImg(canvas) {
   document.body.appendChild(button);
 }
 
+function createText(canvas) {
+  let context = canvas.getContext('2d');
+  context.font = "20px Arial";
+  context.fillStyle = "black";
+  context.textAlign = "center";
+  context.fillText("g³", canvas.width - 15, canvas.height - 15); 
+}
+
+function init() {
+  const canvas = createCanvas();
+  createExportButtonImg(canvas);
+  createText(canvas);
+  setup(canvas);
+}
+
 function setup(canvas) {
   let context = canvas.getContext('2d');
 
@@ -56,7 +71,5 @@ function saveImage(canvas) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  const canvas = createCanvas();
-  createExportButtonImg(canvas);
-  setup(canvas);
+  init();
 });
