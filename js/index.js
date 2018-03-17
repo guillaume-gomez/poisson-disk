@@ -62,17 +62,22 @@ function createGroup(context, radius, xOffset, yOffset, width, height) {
 }
 
 function generateGroupTree(context, x, y, width, height, depth) {
+  if(depth > 2) {
+    createGroup(context, 1, x, y, width, height);
+    return;
+  }
   const rows = getRandomInt(3, 4);
   const heightGroup = height / rows;
   
   const columns = getRandomInt(2, 3);
   const widhGroup = width / columns;
 
-  for(let y = 0; y < rows; y++) {
+  for(let yOffset = 0; yOffset < rows; yOffset++) {
     const offsetGroupY = getRandomInt(5, 15);
-    for(let x = 0; x < columns; x++) {
+    for(let xOffset = 0; xOffset < columns; xOffset++) {
       const offsetGroupX = getRandomInt(5, 15);
-      createGroup(context, 1, (x * widhGroup), (y * heightGroup), widhGroup - offsetGroupX, heightGroup - offsetGroupY);
+      generateGroupTree(context, x + (xOffset * widhGroup), y + (yOffset * heightGroup), widhGroup - offsetGroupX, heightGroup - offsetGroupY, depth + 1);
+      //createGroup(context, 1, (x * widhGroup), (y * heightGroup), widhGroup - offsetGroupX, heightGroup - offsetGroupY);
     }
   }
 }
