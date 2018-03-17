@@ -56,7 +56,9 @@ function createDot(context, x, y, radius) {
 }
 
 function createGroup(context, radius, width, height, xOffset = 0, yOffset = 0) {
-  const p = new Poisson([width, height], 5, 25, 30);
+  const minDistance = getRandomInt(2, 10);
+  const maxDistance = getRandomInt(20, 30);
+  const p = new Poisson([width, height], minDistance, maxDistance, 30);
   const points = p.fill();
   points.forEach(([x,y]) => {
     createDot(context, x + xOffset, y + yOffset, radius);
@@ -69,7 +71,7 @@ function generateGroupTree(canvas) {
   const rows = getRandomInt(3, 4);
   const heightGroup = canvas.height / rows;
   
-  const columns = getRandomInt(2, 4);
+  const columns = getRandomInt(2, 3);
   const widhGroup = canvas.width / columns;
 
   for(let y = 0; y < rows; y++) {
@@ -103,7 +105,7 @@ function saveImage(canvas, withBg = true) {
 }
 
 function getRandomInt(min, max) { 
-  return (Math.floor((max - min) * Math.random()) + min);
+  return (Math.round((max - min) * Math.random()) + min);
 }
 
 
