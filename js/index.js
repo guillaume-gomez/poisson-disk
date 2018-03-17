@@ -14,8 +14,8 @@ const VAR_Y = 10;
 
 function createCanvas() {
   const canvas = document.createElement("CANVAS");
-  canvas.width = 100 * 6;
-  canvas.height = 100 * 8;
+  canvas.width = 100 * 8;
+  canvas.height = 100 * 10;
   canvas.id = 'myCanvas';
   canvas.style.backgroundColor = '#9E82B8';
   document.body.appendChild(canvas);
@@ -78,7 +78,7 @@ function generateGroupTree(context, x, y, width, height, depth) {
     createGroup(context, RADIUS, x, y, width, height);
     return;
   }
-  const rows = getRandomInt(2, 4);
+  const rows = getRandomInt(1, 4);
   const heightGroup = height / rows;
   
   const columns = getRandomInt(2, 3);
@@ -120,7 +120,7 @@ function saveImage(canvas, withBg = true) {
   destCtx.drawImage(canvas, 0, 0);
 
   //add signature :)
-  createText(destinationCanvas);
+  //createText(destinationCanvas);
   
   const image = destinationCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
   window.location.href = image;
