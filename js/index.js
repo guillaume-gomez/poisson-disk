@@ -1,5 +1,16 @@
 import Poisson from "poisson-disk-sampling";
 
+const RADIUS = 1;
+const TREE_X = 5;
+const TREE_Y = 5;
+const OFFSET_X_MIN = 0;
+const OFFSET_X_MAX = 10;
+const OFFSET_Y_MIN = 0;
+const OFFSET_Y_MAX = 10;
+const DEPTH_MAX = 2;
+
+
+
 function createCanvas() {
   const canvas = document.createElement("CANVAS");
   canvas.width = 600;
@@ -41,7 +52,7 @@ function init() {
 
 function setup(canvas) {
   let context = canvas.getContext('2d');
-  generateGroupTree(context, 0, 0, canvas.width, canvas.height, 1);
+  generateGroupTree(context, TREE_X, TREE_Y, canvas.width, canvas.height, 1);
 }
 
 function createDot(context, x, y, radius) {
@@ -52,8 +63,8 @@ function createDot(context, x, y, radius) {
 }
 
 function createGroup(context, radius, xOffset, yOffset, width, height) {
-  const minDistance = getRandomInt(2, 10);
-  const maxDistance = getRandomInt(20, 30);
+  const minDistance = getRandomInt(2, 5);
+  const maxDistance = getRandomInt(5, 15);
   const p = new Poisson([width, height], minDistance, maxDistance, 30);
   const points = p.fill();
   points.forEach(([x,y]) => {
@@ -62,22 +73,21 @@ function createGroup(context, radius, xOffset, yOffset, width, height) {
 }
 
 function generateGroupTree(context, x, y, width, height, depth) {
-  if(depth > 2) {
-    createGroup(context, 1, x, y, width, height);
+  if(depth > DEPTH_MAX) {
+    createGroup(context, RADIUS, x, y, width, height);
     return;
   }
-  const rows = getRandomInt(3, 4);
+  const rows = getRandomInt(1, 4);
   const heightGroup = height / rows;
   
   const columns = getRandomInt(2, 3);
   const widhGroup = width / columns;
 
   for(let yOffset = 0; yOffset < rows; yOffset++) {
-    const offsetGroupY = getRandomInt(5, 15);
+    const offsetGroupY = getRandomInt(OFFSET_X_MIN, OFFSET_X_MAX);
     for(let xOffset = 0; xOffset < columns; xOffset++) {
-      const offsetGroupX = getRandomInt(5, 15);
+      const offsetGroupX = getRandomInt(OFFSET_Y_MIN, OFFSET_Y_MAX);
       generateGroupTree(context, x + (xOffset * widhGroup), y + (yOffset * heightGroup), widhGroup - offsetGroupX, heightGroup - offsetGroupY, depth + 1);
-      //createGroup(context, 1, (x * widhGroup), (y * heightGroup), widhGroup - offsetGroupX, heightGroup - offsetGroupY);
     }
   }
 }
@@ -97,8 +107,8 @@ function saveImage(canvas, withBg = true) {
   }
 
   //draw the original canvas onto the destination canvas
-
   destCtx.drawImage(canvas, 0, 0);
+
   //add signature :)
   createText(destinationCanvas);
   
