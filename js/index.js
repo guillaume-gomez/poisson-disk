@@ -41,11 +41,8 @@ function init() {
 }
 
 function setup(canvas) {
-  //let context = canvas.getContext('2d');
-  //let radius = 1;
-  generateGroupTree(canvas);
-  //createGroup(context, radius, 200, 300, 15, 0);
-
+  let context = canvas.getContext('2d');
+  generateGroupTree(context, 0, 0, canvas.width, canvas.height, 1);
 }
 
 function createDot(context, x, y, radius) {
@@ -55,7 +52,7 @@ function createDot(context, x, y, radius) {
   context.fill();
 }
 
-function createGroup(context, radius, width, height, xOffset = 0, yOffset = 0) {
+function createGroup(context, radius, xOffset, yOffset, width, height) {
   const minDistance = getRandomInt(2, 10);
   const maxDistance = getRandomInt(20, 30);
   const p = new Poisson([width, height], minDistance, maxDistance, 30);
@@ -65,20 +62,18 @@ function createGroup(context, radius, width, height, xOffset = 0, yOffset = 0) {
   });
 }
 
-function generateGroupTree(canvas) {
-  let context = canvas.getContext('2d');
-  
+function generateGroupTree(context, x, y, width, height, depth) {
   const rows = getRandomInt(3, 4);
-  const heightGroup = canvas.height / rows;
+  const heightGroup = height / rows;
   
   const columns = getRandomInt(2, 3);
-  const widhGroup = canvas.width / columns;
+  const widhGroup = width / columns;
 
   for(let y = 0; y < rows; y++) {
     const offsetGroupY = getRandomInt(5, 15);
     for(let x = 0; x < columns; x++) {
       const offsetGroupX = getRandomInt(5, 15);
-      createGroup(context, 1, widhGroup - offsetGroupX, heightGroup - offsetGroupY, (x * widhGroup), (y * heightGroup));
+      createGroup(context, 1, (x * widhGroup), (y * heightGroup), widhGroup - offsetGroupX, heightGroup - offsetGroupY);
     }
   }
 }
