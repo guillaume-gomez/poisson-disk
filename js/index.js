@@ -41,9 +41,10 @@ function init() {
 }
 
 function setup(canvas) {
-  let context = canvas.getContext('2d');
-  let radius = 1;
-  createGroup(context, radius, 200, 300, 15, 0);
+  //let context = canvas.getContext('2d');
+  //let radius = 1;
+  generateGroupTree(canvas);
+  //createGroup(context, radius, 200, 300, 15, 0);
 
 }
 
@@ -61,6 +62,25 @@ function createGroup(context, radius, width, height, xOffset = 0, yOffset = 0) {
     createDot(context, x + xOffset, y + yOffset, radius);
   });
 }
+
+function generateGroupTree(canvas) {
+  let context = canvas.getContext('2d');
+  
+  const rows = getRandomInt(3, 4);
+  const heightGroup = canvas.height / rows;
+  
+  const columns = getRandomInt(2, 4);
+  const widhGroup = canvas.width / columns;
+
+  for(let y = 0; y < rows; y++) {
+    const offsetGroupY = getRandomInt(5, 15);
+    for(let x = 0; x < columns; x++) {
+      const offsetGroupX = getRandomInt(5, 15);
+      createGroup(context, 1, widhGroup - offsetGroupX, heightGroup - offsetGroupY, (x * widhGroup), (y * heightGroup));
+    }
+  }
+}
+
 
 function saveImage(canvas, withBg = true) {
   // create a second canvas
@@ -80,6 +100,10 @@ function saveImage(canvas, withBg = true) {
   
   const image = destinationCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
   window.location.href = image;
+}
+
+function getRandomInt(min, max) { 
+  return (Math.floor((max - min) * Math.random()) + min);
 }
 
 
