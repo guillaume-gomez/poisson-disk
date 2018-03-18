@@ -18,22 +18,38 @@ function createCanvas() {
   canvas.height = 100 * 10;
   canvas.id = 'myCanvas';
   canvas.style.backgroundColor = '#9E82B8';
-  document.body.appendChild(canvas);
+  
+  const canvasDiv = document.getElementById("canvasId");
+  canvasDiv.appendChild(canvas);
   return canvas;
 }
 
 function createExportButtonImg(canvas) {
+  const div = document.createElement("DIV");
+  div.setAttribute("class", "form-group");
+
   const button = document.createElement("BUTTON");
   button.innerHTML = 'export to png';
+  button.setAttribute("class", "btn btn-dark");
   button.onclick = () => { saveImage(canvas) };
-  document.body.appendChild(button);
+
+  div.appendChild(button);
+  const formDiv = document.getElementById("formId");
+  formDiv.appendChild(div);
 }
 
 function createExportButtonImgNoBg(canvas) {
+  const div = document.createElement("DIV");
+  div.setAttribute("class", "form-group");
+  
   const button = document.createElement("BUTTON");
+  button.setAttribute("class", "btn btn-dark");
   button.innerHTML = 'export to png without background color';
   button.onclick = () => { saveImage(canvas, false) };
-  document.body.appendChild(button);
+
+  div.appendChild(button);
+  const formDiv = document.getElementById("formId");
+  formDiv.appendChild(div);
 }
 
 function createText(canvas) {
