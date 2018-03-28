@@ -151,7 +151,7 @@ function saveImage(canvas, withBg = true) {
   if (withBg) {
     //create a rectangle with the desired color
     destCtx.fillStyle = canvas.style.backgroundColor;
-    destCtx.fillRect( 0, 0, canvas.width, canvas.height);
+    destCtx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
   //draw the original canvas onto the destination canvas
