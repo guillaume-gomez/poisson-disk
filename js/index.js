@@ -24,50 +24,24 @@ function createCanvas() {
   return canvas;
 }
 
-function createExportButtonImg(canvas) {
-  const div = document.createElement("DIV");
-  div.setAttribute("class", "form-group");
-
-  const button = document.createElement("BUTTON");
-  button.innerHTML = 'export to png';
-  button.setAttribute("class", "btn btn-dark");
-  button.onclick = () => { saveImage(canvas) };
-
-  div.appendChild(button);
-  const formDiv = document.getElementById("formId");
-  formDiv.appendChild(div);
+function bindExportButtonImg(canvas) {
+  $("#export-to-png").click( function() {
+    saveImage(canvas);
+  });
 }
 
-function createExportButtonImgNoBg(canvas) {
-  const div = document.createElement("DIV");
-  div.setAttribute("class", "form-group");
-
-  const button = document.createElement("BUTTON");
-  button.setAttribute("class", "btn btn-dark");
-  button.innerHTML = 'export to png without background color';
-  button.onclick = () => { saveImage(canvas, false) };
-
-  div.appendChild(button);
-  const formDiv = document.getElementById("formId");
-  formDiv.appendChild(div);
+function bindExportButtonImgNoBg(canvas) {
+  $("#export-to-png-no-bg").click( function() {
+    saveImage(canvas, false);
+  });
 }
 
-function createResetButton(canvas) {
-  const div = document.createElement("DIV");
-  div.setAttribute("class", "form-group");
-
-  const button = document.createElement("BUTTON");
-  button.setAttribute("class", "btn btn-primary");
-  button.innerHTML = 'reset';
-  button.onclick = () => {
+function bindResetButton(canvas) {
+  $("#reset").click( function() {
     let context = canvas.getContext('2d');
     context.clearRect(0, 0, canvas.width, canvas.height);
     init(false)
-  };
-
-  div.appendChild(button);
-  const formDiv = document.getElementById("formId");
-  formDiv.appendChild(div);
+  });
 }
 
 function createText(canvas) {
@@ -82,9 +56,9 @@ function init(createItems = true) {
   let canvas = document.getElementById("myCanvas");
   if(createItems) {
     canvas = createCanvas();
-    createExportButtonImg(canvas);
-    createExportButtonImgNoBg(canvas);
-    createResetButton(canvas);
+    bindExportButtonImg(canvas);
+    bindExportButtonImgNoBg(canvas);
+    bindResetButton(canvas);
   }
   setup(canvas);
 }
