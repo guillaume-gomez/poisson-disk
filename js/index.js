@@ -18,7 +18,7 @@ function createCanvas() {
   canvas.height = 100 * 10;
   canvas.id = 'myCanvas';
   canvas.style.backgroundColor = '#9E82B8';
-  
+
   const canvasDiv = document.getElementById("canvasId");
   canvasDiv.appendChild(canvas);
   return canvas;
@@ -55,11 +55,11 @@ function createExportButtonImgNoBg(canvas) {
 function createResetButton(canvas) {
   const div = document.createElement("DIV");
   div.setAttribute("class", "form-group");
-  
+
   const button = document.createElement("BUTTON");
   button.setAttribute("class", "btn btn-primary");
   button.innerHTML = 'reset';
-  button.onclick = () => { 
+  button.onclick = () => {
     let context = canvas.getContext('2d');
     context.clearRect(0, 0, canvas.width, canvas.height);
     init(false)
@@ -75,7 +75,7 @@ function createText(canvas) {
   context.font = "20px Arial";
   context.fillStyle = "black";
   context.textAlign = "center";
-  context.fillText("g³", canvas.width - 15, canvas.height - 15); 
+  context.fillText("g³", canvas.width - 15, canvas.height - 15);
 }
 
 function init(createItems = true) {
@@ -118,7 +118,7 @@ function generateGroupTree(context, x, y, width, height, depth) {
   }
   const rows = getRandomInt(1, 4);
   const heightGroup = height / rows;
-  
+
   const columns = getRandomInt(2, 3);
   const widthGroup = width / columns;
 
@@ -159,12 +159,11 @@ function saveImage(canvas, withBg = true) {
 
   //add signature :)
   //createText(destinationCanvas);
-  
   const image = destinationCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
   window.location.href = image;
 }
 
-function getRandomInt(min, max) { 
+function getRandomInt(min, max) {
   return (Math.round((max - min) * Math.random()) + min);
 }
 
