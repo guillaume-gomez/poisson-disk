@@ -15,7 +15,7 @@
     "bootstrap": "4.0.0",
     "browserify": "^13.1.1",
     "poisson-disk-sampling": "^1.0.2",
-    "webpack": "^4.1.1"
+    "webpack": "^4.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
