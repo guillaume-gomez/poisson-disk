@@ -18,7 +18,10 @@
           <div class="col-9" id="canvasId"></div>
           <div class="col-3" id="formId">
             <div class="form-group">
-              Color: <input class="jscolor {onFineChange:'update(this)'}" value="9E82B8">
+              Color: <input class="jscolor {onFineChange:'updateBg(this)'}" value="9E82B8">
+            </div>
+            <div class="form-group">
+              Dot Color: <input id="dot-color" class="jscolor" value="000000">
             </div>
             <div class="form-group">
               <button class="btn btn-dark" id="export-to-png">Export to png</button>
@@ -37,8 +40,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
-      function update(jscolor) {
+      function updateBg(jscolor) {
         document.getElementById('myCanvas').style.backgroundColor = '#' + jscolor;
+      }
+
+      function updateDot(jscolor) {
+        
       }
     </script>
   </body>
