@@ -46,6 +46,19 @@ function bindResetButton(canvas) {
   });
 }
 
+function bindPickColor() {
+  $("#dot-color").change( function() {
+    const newColor = `#${$(this).val()}`;
+    let canvas = document.getElementById("myCanvas");
+    let context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    arrayPoints.forEach(({x,y}) => {
+      createDot(context, x, y, RADIUS, newColor);
+    });
+  })
+}
+
 function createText(canvas) {
   let context = canvas.getContext('2d');
   context.font = "20px Arial";
