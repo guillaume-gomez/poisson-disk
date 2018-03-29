@@ -11,6 +11,8 @@ const DEPTH_MAX = 2;
 const VAR_X = 10;
 const VAR_Y = 10;
 
+// only shared variable
+let arrayPoints = [];
 
 function createCanvas() {
   const canvas = document.createElement("CANVAS");
@@ -54,40 +56,46 @@ function createText(canvas) {
 
 function init(createItems = true) {
   let canvas = document.getElementById("myCanvas");
+  let color = `#${$("#dot-color").val()}` || "#FF0000";
   if(createItems) {
     canvas = createCanvas();
     bindExportButtonImg(canvas);
     bindExportButtonImgNoBg(canvas);
     bindResetButton(canvas);
+    bindPickColor();
   }
-  setup(canvas);
+  setup(canvas, color);
 }
 
-function setup(canvas) {
+function setup(canvas, color) {
+  arrayPoints = [];
   let context = canvas.getContext('2d');
-  generateGroupTree(context, TREE_X, TREE_Y, canvas.width, canvas.height, 1);
+  generateGroupTree(context, TREE_X, TREE_Y, canvas.width, canvas.height, 1, color);
 }
 
-function createDot(context, x, y, radius) {
+function createDot(context, x, y, radius, color) {
   context.beginPath();
   context.arc(x, y, radius, 0, 2 * Math.PI, false);
-  context.fillStyle = 'black';
+  context.fillStyle = color;
   context.fill();
 }
 
-function createGroup(context, radius, xOffset, yOffset, width, height) {
+function createGroup(context, radius, xOffset, yOffset, width, height, color) {
   const minDistance = getRandomInt(2, 5);
   const maxDistance = getRandomInt(5, 15);
   const p = new Poisson([width, height], minDistance, maxDistance, 30);
   const points = p.fill();
   points.forEach(([x,y]) => {
-    createDot(context, x + xOffset, y + yOffset, radius);
+    //save points
+    arrayPoints.push({x: x + xOffset, y: y + yOffset});
+
+    createDot(context, x + xOffset, y + yOffset, radius, color);
   });
 }
 
-function generateGroupTree(context, x, y, width, height, depth) {
+function generateGroupTree(context, x, y, width, height, depth, color) {
   if(depth > DEPTH_MAX) {
-    createGroup(context, RADIUS, x, y, width, height);
+    createGroup(context, RADIUS, x, y, width, height, color);
     return;
   }
   const rows = getRandomInt(1, 4);
@@ -109,7 +117,7 @@ function generateGroupTree(context, x, y, width, height, depth) {
       const newHeight = heightGroup;
       const newX = x + currentWidth;
       const newY = y + currentHeight;
-      generateGroupTree(context, newX, newY, newWidth - offsetGroupX, newHeight - offsetGroupY, depth + 1);
+      generateGroupTree(context, newX, newY, newWidth - offsetGroupX, newHeight - offsetGroupY, depth + 1, color);
     }
   }
 }
