@@ -63,6 +63,14 @@ function bindPickColor() {
   })
 }
 
+function bindNbRows() {
+  $("#nb-rows").slider({});
+}
+
+function bindNbColumns() {
+  $("#nb-columns").slider({});
+}
+
 function createText(canvas) {
   let context = canvas.getContext('2d');
   context.font = "20px Arial";
@@ -80,6 +88,8 @@ function init(createItems = true) {
     bindExportButtonImgNoBg(canvas);
     bindResetButton(canvas);
     bindPickColor();
+    bindNbRows();
+    bindNbColumns();
   }
   setup(canvas, color);
 }
@@ -87,6 +97,12 @@ function init(createItems = true) {
 function setup(canvas, color) {
   arrayPoints = [];
   let context = canvas.getContext('2d');
+  const rowOptions = $("#nb-rows").slider('getValue');
+  const columnOptions = $("#nb-columns").slider('getValue');
+  minRows = rowOptions[0];
+  maxRows = rowOptions[1];
+  minColumns = columnOptions[0];
+  maxColumns = columnOptions[1];
   generateGroupTree(context, TREE_X, TREE_Y, canvas.width, canvas.height, 1, color);
 }
 
