@@ -17,6 +17,10 @@ let minRows = 1;
 let maxRows = 4;
 let minColumns = 2;
 let maxColumns = 3;
+let minDistanceMin = 2;
+let minDistanceMax = 5;
+let maxDistanceMin = 5;
+let maxDistanceMax = 15;
 
 function createCanvas() {
   const canvas = document.createElement("CANVAS");
@@ -71,6 +75,14 @@ function bindNbColumns() {
   $("#nb-columns").slider({});
 }
 
+function bindMinDistance() {
+  $("#min-distance").slider({});
+}
+
+function bindMaxDistance() {
+  $("#max-distance").slider({});
+}
+
 function createText(canvas) {
   let context = canvas.getContext('2d');
   context.font = "20px Arial";
@@ -90,6 +102,8 @@ function init(createItems = true) {
     bindPickColor();
     bindNbRows();
     bindNbColumns();
+    bindMinDistance();
+    bindMaxDistance();
   }
   setup(canvas, color);
 }
@@ -99,10 +113,18 @@ function setup(canvas, color) {
   let context = canvas.getContext('2d');
   const rowOptions = $("#nb-rows").slider('getValue');
   const columnOptions = $("#nb-columns").slider('getValue');
+  const minDistanceOptions = $("#min-distance").slider('getValue');
+  const maxDistanceOptions = $("#max-distance").slider('getValue');
+
   minRows = rowOptions[0];
   maxRows = rowOptions[1];
   minColumns = columnOptions[0];
   maxColumns = columnOptions[1];
+  minDistanceMin = minDistanceOptions[0];
+  minDistanceMax = minDistanceOptions[1];
+  maxDistanceMin = maxDistanceOptions[0];
+  maxDistanceMax = maxDistanceOptions[1];
+
   generateGroupTree(context, TREE_X, TREE_Y, canvas.width, canvas.height, 1, color);
 }
 
@@ -114,8 +136,9 @@ function createDot(context, x, y, radius, color) {
 }
 
 function createGroup(context, radius, xOffset, yOffset, width, height, color) {
-  const minDistance = getRandomInt(2, 5);
-  const maxDistance = getRandomInt(5, 15);
+  const minDistance = getRandomInt(minDistanceMin, minDistanceMax);
+  const maxDistance = getRandomInt(maxDistanceMin, maxDistanceMax);
+
   const p = new Poisson([width, height], minDistance, maxDistance, 30);
   const points = p.fill();
   points.forEach(([x,y]) => {
