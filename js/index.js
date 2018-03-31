@@ -11,8 +11,12 @@ const DEPTH_MAX = 2;
 const VAR_X = 10;
 const VAR_Y = 10;
 
-// only shared variable
+// shared variable
 let arrayPoints = [];
+let minRows = 1;
+let maxRows = 4;
+let minColumns = 2;
+let maxColumns = 3;
 
 function createCanvas() {
   const canvas = document.createElement("CANVAS");
@@ -111,10 +115,10 @@ function generateGroupTree(context, x, y, width, height, depth, color) {
     createGroup(context, RADIUS, x, y, width, height, color);
     return;
   }
-  const rows = getRandomInt(1, 4);
+  const rows = getRandomInt(minRows, maxRows);
   const heightGroup = height / rows;
 
-  const columns = getRandomInt(2, 3);
+  const columns = getRandomInt(minColumns, maxColumns);
   const widthGroup = width / columns;
 
   let currentWidth = 0;
