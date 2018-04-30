@@ -1,4 +1,4 @@
-# poisson-disk
+
 ![preview](examples/screenshot.png)
 
 ## samples
