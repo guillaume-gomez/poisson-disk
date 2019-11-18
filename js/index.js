@@ -24,8 +24,8 @@ let maxDistanceMax = 15;
 
 function createCanvas() {
   const canvas = document.createElement("CANVAS");
-  canvas.width = 100 * 8;
-  canvas.height = 100 * 10;
+  canvas.width = 100 * 10;
+  canvas.height = 100 * 12;
   canvas.id = 'myCanvas';
   canvas.style.backgroundColor = '#9E82B8';
 
@@ -198,7 +198,15 @@ function saveImage(canvas, withBg = true) {
   //add signature :)
   //createText(destinationCanvas);
   const image = destinationCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-  window.location.href = image;
+  //window.location.download = "zozo.png";
+  //window.location.href = image;
+
+  var anchor = window.document.createElement('a');
+  anchor.setAttribute('download', 'poison-disk-image.png');
+  anchor.setAttribute('href', image);
+  anchor.click();
+
+  anchor.remove();
 }
 
 function getRandomInt(min, max) {
