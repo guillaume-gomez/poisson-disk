@@ -12,7 +12,7 @@
     "@babel/preset-env": "^7.0.0-beta.42",
     "babel-loader": "^8.0.0-beta.2",
     "babelify": "^7.3.0",
-    "bootstrap": ">=4.1.2",
+    "bootstrap": ">=4.3.1",
     "bootstrap-slider": "^10.0.0",
     "browserify": "^13.1.1",
     "poisson-disk-sampling": "^1.0.2",
