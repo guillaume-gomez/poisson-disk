@@ -1,5 +1,4 @@
 import Poisson from "poisson-disk-sampling";
-
 const RADIUS = 1;
 const TREE_X = 5;
 const TREE_Y = 5;
