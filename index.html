@@ -26,6 +26,10 @@
         margin-left: 3px;
       }
 
+      .gap {
+        gap: 12px;
+      }
+
     </style>
   </head>
   <body>
@@ -35,45 +39,43 @@
         <a class="github-button" href="https://github.com/guillaume-gomez/poisson-disk" data-color-scheme="no-preference: dark_high_contrast; light: light; dark: dark;" data-size="large" aria-label="Star guillaume-gomez/poisson-disk on GitHub">Star</a>
       </div>
     </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-11" id="canvasId"></div>
-          <div class="col-1" id="formId">
-            <div class="form-group">
-              Color: <input class="jscolor {onFineChange:'updateBg(this)'}" value="9E82B8">
-            </div>
-            <div class="form-group">
-              Dot Color: <input id="dot-color" class="jscolor" value="000000">
-            </div>
-            <div class="form-group">
-              <label for="rows">Nomber of rows: </label>
-              </br>
-              <b class="range-limit-left">1</b><input id="nb-rows" type="text" class="span2" value="" data-slider-min="1" data-slider-max="6" data-slider-step="1" data-slider-value="[1,4]"/><b class="range-limit-right">6</b>
-            </div>
-            <div class="form-group">
-              <label for="columns">Nomber of columns: </label>
-              </br>
-              <b class="range-limit-left">1</b><input id="nb-columns" type="text" class="span2" value="" data-slider-min="1" data-slider-max="4" data-slider-step="1" data-slider-value="[2,3]"/><b class="range-limit-right">4</b>
-            </div>
-            <div class="form-group">
-              <label for="min-distance">Minimum distance between 2 groups( in pixel): </label>
-              </br>
-              <b class="range-limit-left">1</b><input id="min-distance" type="text" class="span2" value="" data-slider-min="2" data-slider-max="15" data-slider-step="1" data-slider-value="[2,5]"/><b class="range-limit-right">15</b>
-            </div>
-            <div class="form-group">
-              <label for="max-distance">Maximum distance between 2 groups( in pixel): </label>
-              </br>
-              <b class="range-limit-left">5</b><input id="max-distance" type="text" class="span2" value="" data-slider-min="5" data-slider-max="30" data-slider-step="1" data-slider-value="[5,15]"/><b class="range-limit-right">30</b>
-            </div>
-            <div class="form-group">
-              <button class="btn btn-dark" id="export-to-png">Export to png</button>
-            </div>
-            <div class="form-group">
-              <button class="btn btn-dark" id="export-to-png-no-bg">Export to png without background color</button>
-            </div>
-            <div class="form-group">
-              <button class="btn btn-primary" id="reset">Generate</button>
-            </div>
+      <div class="d-flex flex-xl-row flex-sm-column justify-content-center gap">
+        <div id="canvasId"></div>
+        <div class="bg-light p-2" id="formId">
+          <div class="form-group">
+            Color: <input class="jscolor {onFineChange:'updateBg(this)'}" value="9E82B8">
+          </div>
+          <div class="form-group">
+            Dot Color: <input id="dot-color" class="jscolor" value="000000">
+          </div>
+          <div class="form-group">
+            <label for="rows">Nomber of rows: </label>
+            </br>
+            <b class="range-limit-left">1</b><input id="nb-rows" type="text" class="span2" value="" data-slider-min="1" data-slider-max="6" data-slider-step="1" data-slider-value="[1,4]"/><b class="range-limit-right">6</b>
+          </div>
+          <div class="form-group">
+            <label for="columns">Nomber of columns: </label>
+            </br>
+            <b class="range-limit-left">1</b><input id="nb-columns" type="text" class="span2" value="" data-slider-min="1" data-slider-max="4" data-slider-step="1" data-slider-value="[2,3]"/><b class="range-limit-right">4</b>
+          </div>
+          <div class="form-group">
+            <label for="min-distance">Minimum distance between 2 groups( in pixel): </label>
+            </br>
+            <b class="range-limit-left">1</b><input id="min-distance" type="text" class="span2" value="" data-slider-min="2" data-slider-max="15" data-slider-step="1" data-slider-value="[2,5]"/><b class="range-limit-right">15</b>
+          </div>
+          <div class="form-group">
+            <label for="max-distance">Maximum distance between 2 groups( in pixel): </label>
+            </br>
+            <b class="range-limit-left">5</b><input id="max-distance" type="text" class="span2" value="" data-slider-min="5" data-slider-max="30" data-slider-step="1" data-slider-value="[5,15]"/><b class="range-limit-right">30</b>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-dark" id="export-to-png">Export to png</button>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-dark" id="export-to-png-no-bg">Export to png without background color</button>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" id="reset">Generate</button>
           </div>
         </div>
       </div>
